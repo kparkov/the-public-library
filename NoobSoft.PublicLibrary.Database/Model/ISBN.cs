@@ -1,4 +1,4 @@
-namespace NoobSoft.PublicLibrary.Database.Data;
+namespace NoobSoft.PublicLibrary.Database.Model;
 
 public class ISBN
 {

@@ -1,0 +1,58 @@
+# The Public Library
+
+A C# learning challenge.
+
+## The task
+
+The task is to create bookloaning software for a library, one task at a time.
+
+## The given
+
+We have two projects, `NoobSoft.PublicLibrary.Database`, which represents our data layer - and `NoobSoft.PublicLibrary.Database.Tests`, which contains unit tests for our data layer.
+
+Inside the data layer project we have a folder, `Data`, which contains three data files:
+
+- `authors.csv`: a collection of authors. Contains all the authors known to the library.
+- `books.csv`: a book collection of books, written by the authors. Every book is written by exactly one of the known authors.
+- `loaners.csv`: a directory of the known loaners at the library.
+
+## Tasks
+
+- Fork this project to your own repository, so you can work on it - and continue your work in your own repository by cloning the project from there on to your local computer. Work _test-driven_, so the only way you test is by way of your unit tests.
+
+### Data retrieval
+
+- Create code that can populate a collection of `Author` objects from the data source `authors.csv`.
+- Do the same for `Book`.
+- Create a fitting type for the loaner, and populate this as well. (tip: does this type have anything in common with others? If so, is this an opportunity to refactor?).
+- Make sure that `Author` holds a list of the `Book`s this author has written, and that the `Book` also holds a reference back to the author.
+- Create a repository / data hub so you can access your data thorugh a single entry point. It should allow us to retrieve the whole list of any type, or a single item by its `Id`. This should perform well.
+
+### Validation and search
+
+- ISBN numbers follow a particular pattern. Three of the books in the books source do not follow this pattern. The `ISBN` type should be able to validate these patterns, and the resulting failure should be handled as you best see fit.
+- The repository should allow us to find a book by its ISBN number.
+- The repository should allow us to find any person (author or loaner) by a partial name match or a birthday.
+
+### Book loans
+
+- A bookloaner should be able to loan a book.
+- The loan should be time limited to 30 days.
+- Once a book has been lent, it is not available to anyone else, and an attempt to loan it to someone else should fail.
+- The book becomes available again when it is actively returned.
+
+### Fees
+
+- If the time limit is exceeded before it is returned, a fee of 10 coins will be issued. For every 5 days thereafter, an additional fee of 5 coins will be added. This is on a per-book basis.
+- Someone with a debt exceeding 100 coins cannot make any new loans until they have paid enough of their debt to bring it below 100 coins.
+- If a time limit for returning a book is exceeded more than 180 days, the book is assumed to be lost from the library collection (but _not_ from the authorship), and a fee of 300 coins is issued to the loaner.
+
+### Reservations
+
+- A reservation can be made for a book. This means the loaner is the only one who can loan the book when it is returned. There is a grace period of 10 days before it is either offered to the next reservation (under the same conditions) or the public.
+
+### Popular books
+
+- It is interesting for the library to identify the books that are most popular, and they feel the data should be able to provide that overview, but they don't know the details. Suggest a solution for ranking books by popularity.
+- The really popular books just don't get around to all the loaners waiting for it. The standard time limit should be reduced to 10 days for the very popular books (a category they want you to identify from the ranking system).
+- It should be possible to have several copies of the same book, so we can loan a copy to several people.

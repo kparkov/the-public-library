@@ -13,7 +13,7 @@ We have two projects, `NoobSoft.PublicLibrary.Database`, which represents our da
 Inside the data layer project we have a folder, `Data`, which contains three data files:
 
 - `authors.csv`: a collection of authors. Contains all the authors known to the library.
-- `books.csv`: a book collection of books, written by the authors. Every book is written by exactly one of the known authors.
+- `books.csv`: a collection of books, written by the authors. Every book is written by exactly one of the known authors.
 - `loaners.csv`: a directory of the known loaners at the library.
 
 ## Tasks

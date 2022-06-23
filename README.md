@@ -58,3 +58,7 @@ _At this point, we start implementing business cases, and so it will be logical 
 - It is interesting for the library to identify the books that are most popular, and they feel the data should be able to provide that overview, but they don't know the details. Suggest a solution for ranking books by popularity.
 - The really popular books just don't get around to all the loaners waiting for it. The standard time limit should be reduced to 10 days for the very popular books (a category they want you to identify from the ranking system).
 - It should be possible to have several copies of the same book, so we can loan a copy to several people.
+
+### Data persistence
+
+- The library feels it is a bit annoying that there is a complete data loss each time the app shuts down. The database should be persisted in files at logical points in time. When the app starts, it should take the locally persisted data if there is any, or the initial data otherwise. Do not overwrite the initial data files. Do not persist inside the repository folders. Instead, persist in a logical place in the local machine user data directory.

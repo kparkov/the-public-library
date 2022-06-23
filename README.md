@@ -25,7 +25,6 @@ Inside the data layer project we have a folder, `Data`, which contains three dat
 - Create code that can populate a collection of `Author` objects from the data source `authors.csv`.
 - Do the same for `Book`.
 - Create a fitting type for the loaner, and populate this as well. (tip: does this type have anything in common with others? If so, is this an opportunity to refactor?).
-- Make sure that `Author` holds a list of the `Book`s this author has written, and that the `Book` also holds a reference back to the author.
 - Create a repository / data hub so you can access your data thorugh a single entry point. It should allow us to retrieve the whole list of any type, or a single item by its `Id`. This should perform well.
 
 ### Validation and search

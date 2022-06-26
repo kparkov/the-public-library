@@ -41,6 +41,8 @@ _At this point, we start implementing business cases, and so it will be logical 
 - The loan should be time limited to 30 days.
 - Once a book has been lent, it is not available to anyone else, and an attempt to loan it to someone else should fail.
 - The book becomes available again when it is actively returned.
+- We can get the current loan/reservation status for a person (bookloaner).
+- We can get the current loan/reservation status for a book.
 
 ### Fees
 
@@ -61,3 +63,7 @@ _At this point, we start implementing business cases, and so it will be logical 
 ### Data persistence
 
 - The library feels it is a bit annoying that there is a complete data loss each time the app shuts down. The database should be persisted in files at logical points in time. When the app starts, it should take the locally persisted data if there is any, or the initial data otherwise. Do not overwrite the initial data files. Do not persist inside the repository folders. Instead, persist in a logical place in the local machine user data directory.
+
+### Frontend
+
+- Build an interactive command line frontend that supports all of the functions of the library: see status for book and person, making loans, reservations, viewing the popular books and so forth.

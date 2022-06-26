@@ -62,7 +62,7 @@ _At this point, we start implementing business cases, and so it will be logical 
 
 ### Data persistence
 
-- The library feels it is a bit annoying that there is a complete data loss each time the app shuts down. The database should be persisted in files at logical points in time. When the app starts, it should take the locally persisted data if there is any, or the initial data otherwise. Do not overwrite the initial data files. Do not persist inside the repository folders. Instead, persist in a logical place in the local machine user data directory.
+- It is a bit annoying that there is a complete data loss each time the app shuts down. The database should be persisted in files at logical points in time. When the app starts, it should take the locally persisted data if there is any, or the initial data otherwise. Do not overwrite the initial data files. Do not persist inside the repository folders. Instead, persist in a logical place in the local machine user data directory.
 
 ### Frontend
 

@@ -30,7 +30,7 @@ Inside the data layer project we have a folder, `Data`, which contains three dat
 ### Validation and search
 
 - ISBN numbers follow a particular pattern. Three of the books in the books source do not follow this pattern. The `ISBN` class should be able to validate these patterns, and the resulting failure should be handled as you best see fit.
-- The repository should allow us to find a book by its ISBN number.
+- The repository should allow us to find a book by its ISBN number. Partial matches should also work.
 - The repository should allow us to find any person (author or loaner) by a partial name match or a birthday.
 
 ### Book loans

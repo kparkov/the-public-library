@@ -54,7 +54,6 @@ public class DataFaker
         .RuleFor(x => x.Id, f => Guid.NewGuid())
         .RuleFor(x => x.Name, f => f.Person.FullName)
         .RuleFor(x => x.Birthday, f => f.Date.Past(150, DateTime.Now.AddYears(-10)))
-        .RuleFor(x => x.Gender, f => f.PickRandom(FakeGender.Male, FakeGender.Female))
         .GenerateForever();
 
     public IEnumerable<Book> Books(FakePerson author) => 

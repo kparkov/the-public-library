@@ -2,25 +2,19 @@
 
 namespace NoobSoft.PublicLibrary.DataFaker;
 
-public enum Gender
+public class ISBN
 {
-    Unknown,
-    Male,
-    Female
-}
+    private readonly string _value;
+    
+    public ISBN(string isbn)
+    {
+        _value = isbn;
+    }
 
-
-
-public class Person
-{
-    public Guid Id { get; set; }
-    public string Name { get; set; }
-    public DateTime Birthday { get; set; }
-    public Gender Gender { get; set; }
-}
-
-public class Author : Person
-{
+    public override string ToString()
+    {
+        return _value;
+    }
 }
 
 public class Book
@@ -33,25 +27,37 @@ public class Book
     public string Summary { get; set; }
 }
 
-public class BookLoaner
-{
-}
-
 
 public class DataFaker
 {
+    private Random random = new Random(0);
+    
+    public string GenerateISBN13()
+    {
+        IEnumerable<int> r = new List<int>() { 9, 7, 8 };
+        
+        r = r.Concat(Enumerable.Range(0, 9).Select(x => random.Next(0, 10))).ToArray();
+        
+        int checksum = r.Select((item, index) => item * (index % 2 == 0 ? 1 : 3)).Sum();
+        int last = 10 - (checksum % 10);
+        r = r.Append(last);
+        var d = r.Select(x => x.ToString()).ToArray();
+        
+        return d[0] + d[1] +d[2] + "-" + d[3] + d[4] + "-" + d[5] + d[6] + d[7] + d[8] + "-" + d[9] + d[10] + d[11] + "-" + d[12];
+    }
+    
     public IEnumerable<ISBN> ISBNs => new Faker<ISBN>()
-        .CustomInstantiator(f => new ISBN(f.Random.Replace("###-##-####-###-#")))
+        .CustomInstantiator(f => new ISBN(GenerateISBN13()))
         .GenerateForever();
 
-    public IEnumerable<Person> People => new Faker<Person>()
+    public IEnumerable<FakePerson> People => new Faker<FakePerson>()
         .RuleFor(x => x.Id, f => Guid.NewGuid())
         .RuleFor(x => x.Name, f => f.Person.FullName)
         .RuleFor(x => x.Birthday, f => f.Date.Past(150, DateTime.Now.AddYears(-10)))
-        .RuleFor(x => x.Gender, f => f.PickRandom(Gender.Male, Gender.Female))
+        .RuleFor(x => x.Gender, f => f.PickRandom(FakeGender.Male, FakeGender.Female))
         .GenerateForever();
 
-    public IEnumerable<Book> Books(Person author) => 
+    public IEnumerable<Book> Books(FakePerson author) => 
         new Faker<Book>()
             .RuleFor(x => x.Id, f => Guid.NewGuid())
             .RuleFor(x => x.ISBN, f => ISBNs.First().ToString())
@@ -61,7 +67,7 @@ public class DataFaker
             .RuleFor(x => x.Summary, f => f.Lorem.Paragraph())
             .GenerateForever();
 
-    public IEnumerable<(Person Author, Book[] Books)> Authorships()
+    public IEnumerable<(FakePerson Author, Book[] Books)> Authorships()
     {
         while (true)
         {

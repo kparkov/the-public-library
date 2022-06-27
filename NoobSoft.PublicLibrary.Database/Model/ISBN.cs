@@ -1,6 +1,6 @@
 namespace NoobSoft.PublicLibrary.Database.Model;
 
-public class ISBN
+public readonly struct ISBN
 {
     private readonly string _value;
     
